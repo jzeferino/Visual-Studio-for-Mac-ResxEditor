@@ -31,6 +31,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AddinInfo.cs" />
     <Compile Include="src\DisplayBindings.cs" />
+    <Compile Include="src\ResxEditorView.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />
@@ -42,5 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResxEditor.Core\ResxEditor.Core.csproj">
+      <Project>{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}</Project>
+      <Name>ResxEditor.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

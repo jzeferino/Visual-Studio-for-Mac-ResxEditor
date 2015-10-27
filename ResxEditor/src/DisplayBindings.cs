@@ -12,7 +12,7 @@ namespace ResxEditor
 
 		public IViewContent CreateContent (FilePath fileName, string mimeType, Project ownerProject)
 		{
-			throw new NotImplementedException ();
+			return new ResxEditorView ();
 		}
 
 		public string Name {
@@ -33,8 +33,7 @@ namespace ResxEditor
 		}
 
 		public bool CanUseAsDefault {
-//			get { return true; } // TODO
-			get { return false; }
+			get { return true; }
 		}
 
 		#endregion
