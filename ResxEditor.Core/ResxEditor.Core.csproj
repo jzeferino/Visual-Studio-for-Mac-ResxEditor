@@ -62,14 +62,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windowed\MainWindow.cs" />
     <Compile Include="Windowed\Program.cs" />
-    <Compile Include="Gui\ResourceList.cs" />
     <Compile Include="gtk-gui\MainWindow.cs" />
-    <Compile Include="Gui\ResourceControlBar.cs" />
-    <Compile Include="Gui\ResourceEditorView.cs" />
+    <Compile Include="Models\ResourceModel.cs" />
+    <Compile Include="Views\ResourceList.cs" />
+    <Compile Include="Views\ResourceControlBar.cs" />
+    <Compile Include="Views\ResourceEditorView.cs" />
+    <Compile Include="Interfaces\IListViewColumn.cs" />
+    <Compile Include="Models\ResourceListStore.cs" />
+    <Compile Include="Views\LocalizationColumn.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Windowed\" />
-    <Folder Include="Gui\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>

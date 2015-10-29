@@ -2,6 +2,7 @@
 using MonoDevelop.Ide.Gui;
 using Xwt;
 using ResxEditor.Core;
+using ResxEditor.Core.Views;
 
 namespace ResxEditor
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Gtk;
-using ResxEditor.Core;
+using ResxEditor.Core.Views;
 
 public partial class MainWindow: Gtk.Window
 {
