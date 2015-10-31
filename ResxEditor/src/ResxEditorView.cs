@@ -1,45 +1,53 @@
-﻿using System;
+﻿using Gtk;
 using MonoDevelop.Ide.Gui;
-using Xwt;
-using ResxEditor.Core;
 using ResxEditor.Core.Views;
 
 namespace ResxEditor
 {
-	public class ResxEditorView : AbstractXwtViewContent
+	public class ResxEditorView : AbstractViewContent
 	{
-		ScrollView window;
+		Gtk.Widget Container {
+			get;
+			set;
+		}
 
 		public ResxEditorView() {
-			//
-//			Table t = new Table ();
-//			t.Add (new Label ("One:"), 0, 1, 0, 1);
-//			t.Add (new TextEntry (), 1, 2, 0, 1);
-//			t.Add (new Label ("Two:"), 0, 1, 1, 2);
-//			t.Add (new TextEntry (), 1, 2, 1, 2);
-//			t.Add (new Label ("Three:"), 0, 1, 2, 3);
-//			t.Add (new TextEntry (), 1, 2, 2, 3);
-			//
-			window = new ScrollView (Xwt.Toolkit.CurrentEngine.WrapWidget(new ResourceList ()));
+			ResourceEditor = new ResourceEditorView ();
+			Gtk.HPaned container = new Gtk.HPaned ();
+			container.Add (ResourceEditor);
+
+			Container = container;
+			Container.ShowAll ();
 		}
+
+		public ResourceEditorView ResourceEditor {
+			get;
+			private set;
+		}
+
+		string CurrentFile {
+			get;
+			set;
+		}
+
+		#region implemented abstract members of AbstractBaseViewContent
+
+		public override Widget Control {
+			get {
+				return Container;
+			}
+		}
+
+		#endregion
 
 		#region implemented abstract members of AbstractViewContent
 
 		public override void Load (string fileName)
 		{
-//			throw new NotImplementedException (); // TODO
+			return;
 		}
 
 		#endregion
-
-		#region implemented abstract members of AbstractXwtViewContent
-
-		public override Xwt.Widget Widget {
-			get { return window; }
-		}
-
-		#endregion
-		
 	}
 }
 
