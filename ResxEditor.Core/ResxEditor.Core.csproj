@@ -77,5 +77,10 @@
     <Folder Include="Models\" />
     <Folder Include="Views\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resx-512.png" />
+    <None Include="Resources\resx-32.png" />
   </ItemGroup>
 </Project>
