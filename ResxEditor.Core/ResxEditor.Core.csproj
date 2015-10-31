@@ -51,6 +51,7 @@
     <Reference Include="libstetic">
       <HintPath>..\..\..\..\..\Applications\Xamarin Studio.app\Contents\Resources\lib\monodevelop\AddIns\MonoDevelop.GtkCore\libstetic.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -68,8 +69,16 @@
     <Compile Include="Views\ResourceControlBar.cs" />
     <Compile Include="Views\ResourceEditorView.cs" />
     <Compile Include="Interfaces\IListViewColumn.cs" />
-    <Compile Include="Models\ResourceListStore.cs" />
+    <Compile Include="Models\ResourceListStore.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Views\LocalizationColumn.cs" />
+    <Compile Include="Interfaces\IResourceController.cs" />
+    <Compile Include="Interfaces\IResourceListStore.cs" />
+    <Compile Include="Interfaces\IResourceModel.cs" />
+    <Compile Include="Models\ResourceFileHandler.cs" />
+    <Compile Include="Interfaces\IResourceFileHandler.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -78,6 +87,7 @@
     <Folder Include="Views\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\resx-512.png" />

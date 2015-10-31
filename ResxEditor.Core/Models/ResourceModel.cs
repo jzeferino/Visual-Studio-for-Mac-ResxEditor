@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ResxEditor.Core.Interfaces;
 
 namespace ResxEditor.Core.Models
 {
-	public class ResourceModel {
+	public class ResourceModel : IResourceModel
+	{
 
 		public ResourceModel(string name, string value) {
 			Name = name;

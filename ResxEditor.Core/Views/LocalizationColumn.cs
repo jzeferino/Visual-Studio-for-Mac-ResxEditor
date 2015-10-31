@@ -4,7 +4,8 @@ using ResxEditor.Core.Interfaces;
 
 namespace ResxEditor.Core.Views
 {
-	public class LocalizationColumn : TreeViewColumn, IListViewColumn {
+	public class LocalizationColumn : TreeViewColumn, IListViewColumn
+	{
 		CellRenderer m_renderer;
 		readonly Type m_columnType = typeof(string);
 

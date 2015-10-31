@@ -20,9 +20,8 @@ namespace ResxEditor.Core.Views
 			get;
 			private set;
 		}
-		readonly ResourceListStore store;
 
-		public ResourceList () : base()
+		public ResourceList (IResourceListStore store) : base()
 		{
 			NameColumn = new LocalizationColumn (true) { Title = "Name" };
 			ValueColumn = new LocalizationColumn (true) { Title = "Value" };
@@ -39,29 +38,11 @@ namespace ResxEditor.Core.Views
 			};
 			ValueColumn.Edited += (_, e) => store.SetValue (e.Path, e.NextText);
 
-			store = new ResourceListStore ();
-
-			//
-			store.AppendValues (new ResourceModel ("test1", "test2"));
-			for (int i = 0; i < 100; i++) {
-				store.AppendValues (new ResourceModel ("test" + i, null));
-			}
-			//
-
-			Model = store;
+			Model = (TreeModel)store;
 		}
 
 		public TreeSelection GetSelectedResource () {
-			Console.WriteLine(Selection.Data.Keys);
 			return Selection;
-		}
-
-		public bool RemoveResource (int index) {
-			return false;
-		}
-
-		public bool AddNewRow () {
-			return false;
 		}
 	}
 }

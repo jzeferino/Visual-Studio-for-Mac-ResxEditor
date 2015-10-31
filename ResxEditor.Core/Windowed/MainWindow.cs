@@ -8,7 +8,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		this.SetSizeRequest (500, 500);
 		this.Add (new ResourceEditorView());
-
+		//"Windowed/Test.resx"
 		this.ShowAll ();
 	}
 

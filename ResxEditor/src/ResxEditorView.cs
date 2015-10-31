@@ -1,34 +1,51 @@
-﻿using Gtk;
+﻿using System;
+using Gtk;
 using MonoDevelop.Ide.Gui;
-using ResxEditor.Core.Views;
+using ResxEditor.Core.Interfaces;
+using ResxEditor.Core.Controllers;
 
 namespace ResxEditor
 {
 	public class ResxEditorView : AbstractViewContent
 	{
-		Gtk.Widget Container {
+		IResourceController Controller {
+			get;
+			set;
+		}
+
+		Widget Container {
 			get;
 			set;
 		}
 
 		public ResxEditorView() {
-			ResourceEditor = new ResourceEditorView ();
-			Gtk.HPaned container = new Gtk.HPaned ();
-			container.Add (ResourceEditor);
+			Controller = new ResourceController ();
+			HPaned container = new HPaned ();
+			container.Add (Controller.ResourceEditorView);
 
 			Container = container;
 			Container.ShowAll ();
-		}
-
-		public ResourceEditorView ResourceEditor {
-			get;
-			private set;
 		}
 
 		string CurrentFile {
 			get;
 			set;
 		}
+
+		#region AbstractViewContent Overrides
+		string m_contentName;
+		public override string ContentName {
+			get {
+				return m_contentName;
+			}
+			set {
+				if (value != m_contentName) {
+					m_contentName = value;
+					OnContentNameChanged (EventArgs.Empty);
+				}
+			}
+		}
+		#endregion
 
 		#region implemented abstract members of AbstractBaseViewContent
 
@@ -44,7 +61,8 @@ namespace ResxEditor
 
 		public override void Load (string fileName)
 		{
-			return;
+			ContentName = fileName;
+			Controller.Load (fileName);
 		}
 
 		#endregion
