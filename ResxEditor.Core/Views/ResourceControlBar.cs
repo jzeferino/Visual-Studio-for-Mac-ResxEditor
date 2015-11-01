@@ -6,9 +6,7 @@ namespace ResxEditor.Core.Views
 	{
 		static readonly Gtk.Label label = new Gtk.Label("Add Resource");
 
-		public AddResourceButton(): base(label)
-		{
-		}
+		public AddResourceButton(): base(label) {}
 	}
 
 	public class RemoveResourceButton : Gtk.Button
@@ -20,20 +18,32 @@ namespace ResxEditor.Core.Views
 
 	public class ResourceControlBar : Gtk.HButtonBox
 	{
-		public AddResourceButton AddResourceButton {
+		public event EventHandler OnAddResource;
+		public event EventHandler OnRemoveResource;
+
+		AddResourceButton AddResourceButton {
 			get;
-			private set;
+			set;
 		}
 
-		public RemoveResourceButton RemoveResourceButton {
+		RemoveResourceButton RemoveResourceButton {
 			get;
-			private set;
+			set;
 		}
 
 		public ResourceControlBar ()
 		{
 			AddResourceButton = new AddResourceButton ();
 			RemoveResourceButton = new RemoveResourceButton ();
+
+			AddResourceButton.Clicked += (sender, e) => {
+				if (OnAddResource != null)
+					OnAddResource (this, e);
+			};
+			RemoveResourceButton.Clicked += (sender, e) => {
+				if (OnRemoveResource != null)
+					OnRemoveResource (this, e);
+			};
 
 			PackStart (AddResourceButton, true, true, 5);
 			PackEnd (RemoveResourceButton, true, true, 5);

@@ -28,6 +28,7 @@ namespace ResxEditor.Core.Interfaces
 			set;
 		}
 
+		void AddNewResource();
 		bool RemoveCurrentResource();
 		void Load(string fileName);
 	}

@@ -11,6 +11,10 @@ namespace ResxEditor.Core.Interfaces
 		bool SetValue (string path, string nextValue);
 
 		#region ListStore
+		TreeIter Prepend ();
+
+		TreePath GetPath (TreeIter iter);
+
 		bool Remove (ref TreeIter iter);
 		#endregion
 	}

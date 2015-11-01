@@ -2,7 +2,6 @@
 using Gtk;
 using ResxEditor.Core.Models;
 using ResxEditor.Core.Interfaces;
-using ResxEditor.Core.Controllers;
 
 namespace ResxEditor.Core.Views
 {
@@ -10,41 +9,36 @@ namespace ResxEditor.Core.Views
 	{
 		public ResourceEditorView () : base()
 		{
-			IResourceListStore store = new ResourceListStore ();
-			ResourceList = new ResourceList (store);
+			ResourceList = new ResourceList ();
 			ResourceControlBar = new ResourceControlBar ();
+
+			ResourceControlBar.OnAddResource += (sender, e) => {
+				if (this.OnAddResource != null)
+					this.OnAddResource (this, e);
+			};
+			ResourceControlBar.OnRemoveResource += (sender, e) => {
+				if (OnRemoveResource != null)
+					OnRemoveResource (this, e);
+			};
 
 			ScrolledWindow listContainer = new ScrolledWindow ();
 			listContainer.Add (ResourceList);
-
-			ResourceControlBar.AddResourceButton.Clicked += (_, __) => Controller.RemoveCurrentResource();
-
-			ResourceControlBar.RemoveResourceButton.Clicked += (object sender, EventArgs e) => {
-				TreeIter iter;
-				TreeSelection selection = ResourceList.GetSelectedResource();
-				selection.GetSelected(out iter);
-				(ResourceList.Model as ListStore).Remove(ref iter);
-			};
 
 			this.PackStart (ResourceControlBar, false, true, 5);
 			this.PackEnd (listContainer);
 		}
 
+		public event EventHandler OnAddResource;
 		public event EventHandler OnRemoveResource;
-
-		public IResourceController Controller {
-			get;
-			private set;
-		}
 
 		public ResourceList ResourceList {
 			get;
-			private set;
+			set;
 		}
 
-		public ResourceControlBar ResourceControlBar {
+		ResourceControlBar ResourceControlBar {
 			get;
-			private set;
+			set;
 		}
 
 		public void Load (string filename) {

@@ -22,6 +22,21 @@ namespace ResxEditor.Core.Controllers
 //			ResourceList = resourceList;
 			Store = new ResourceListStore ();
 			ResourceEditorView.ResourceList.Model = (TreeModel)Store;
+
+			AttachListeners ();
+		}
+
+		private void AttachListeners () {
+			ResourceEditorView.OnAddResource += (_, __) => AddNewResource ();
+			ResourceEditorView.OnRemoveResource += (_, __) => RemoveCurrentResource ();
+			ResourceEditorView.ResourceList.OnNameEdited += (_, e) => Store.SetName (e.Path, e.NextText);
+			ResourceEditorView.ResourceList.OnValueEdited += (_, e) => Store.SetValue (e.Path, e.NextText);
+		}
+
+		public void AddNewResource() {
+			TreeIter iter = Store.Prepend();
+			TreePath path = Store.GetPath(iter);
+			ResourceEditorView.ResourceList.SetCursor(path, ResourceEditorView.ResourceList.NameColumn, true);
 		}
 
 		public bool RemoveCurrentResource() {

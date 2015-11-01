@@ -12,6 +12,9 @@ namespace ResxEditor.Core.Views
 
 	public class ResourceList : TreeView
 	{
+		public event EventHandler<ResourceEditedEventArgs> OnNameEdited;
+		public event EventHandler<ResourceEditedEventArgs> OnValueEdited;
+
 		public LocalizationColumn NameColumn {
 			get;
 			private set;
@@ -21,7 +24,7 @@ namespace ResxEditor.Core.Views
 			private set;
 		}
 
-		public ResourceList (IResourceListStore store) : base()
+		public ResourceList () : base()
 		{
 			NameColumn = new LocalizationColumn (true) { Title = "Name" };
 			ValueColumn = new LocalizationColumn (true) { Title = "Value" };
@@ -33,12 +36,14 @@ namespace ResxEditor.Core.Views
 			ValueColumn.AddAttribute ("text", 1);
 
 			NameColumn.Edited += (_, e) => {
-				store.SetName (e.Path, e.NextText);
+				if (OnNameEdited != null)
+					OnNameEdited(this, e);
 				SetCursor (new TreePath (e.Path), ValueColumn, true);
 			};
-			ValueColumn.Edited += (_, e) => store.SetValue (e.Path, e.NextText);
-
-			Model = (TreeModel)store;
+			ValueColumn.Edited += (_, e) => {
+				if (OnValueEdited != null)
+					OnValueEdited(this, e);
+			};
 		}
 
 		public TreeSelection GetSelectedResource () {

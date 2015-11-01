@@ -15,11 +15,26 @@ namespace ResxEditor.Core.Models
 
 		public ResourceListStore() : base(typeof(string), typeof(string))
 		{
-
+//			resourceWriter = new ResXResourceWriter (filename);
+////			resourceWriter.Close ();
+//			ResXResourceReader resourceReader = new ResXResourceReader (filename);
+//			IDictionaryEnumerator dict = resourceReader.GetEnumerator();
+//			while (dict.MoveNext ())
+//				this.AppendValues (new ResourceModel(dict.Key as string, dict.Value as string));
 		}
 
 		public void AppendValues(IResourceModel item) {
 			this.AppendValues (item.Name, item.Value);
+		}
+
+		public bool SetColumnValue(string path, int column, string value) {
+			TreeIter iter;
+			if (! this.GetIter(out iter, new TreePath(path))) {
+				return false;
+			} else {
+				this.SetValue (iter, column, value);
+				return true;
+			}
 		}
 
 		public bool SetName(string path, string nextName) {
