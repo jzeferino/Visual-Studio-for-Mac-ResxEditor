@@ -46,6 +46,10 @@ namespace ResxEditor.Core.Controllers
 
 			Resources.ForEach (m_resxWriter.AddResource);
 
+			if (Resources.Count == 0) {
+				m_resxWriter.AddMetadata ("", "");
+			}
+
 			m_resxWriter.Close();
 		}
 
