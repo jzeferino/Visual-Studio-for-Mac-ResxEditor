@@ -23,8 +23,16 @@ namespace ResxEditor
 			HPaned container = new HPaned ();
 			container.Add (Controller.ResourceEditorView);
 
+			AttachListeners ();
+
 			Container = container;
 			Container.ShowAll ();
+		}
+
+		void AttachListeners() {
+			Controller.OnDirtyChanged += (_, isDirty) => {
+				IsDirty = isDirty;
+			};
 		}
 
 		string CurrentFile {
@@ -63,6 +71,11 @@ namespace ResxEditor
 		{
 			ContentName = fileName;
 			Controller.Load (fileName);
+		}
+
+		public override void Save (string fileName)
+		{
+			Controller.Save (fileName);
 		}
 
 		#endregion

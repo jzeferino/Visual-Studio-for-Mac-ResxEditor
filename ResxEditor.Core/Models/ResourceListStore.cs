@@ -56,6 +56,10 @@ namespace ResxEditor.Core.Models
 				return true;
 			}
 		}
+
+		public string GetName(TreeIter iter) {
+			return this.GetValue (iter, 0) as string;
+		}
 	}
 
 }

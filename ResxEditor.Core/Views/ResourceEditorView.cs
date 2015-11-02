@@ -12,20 +12,14 @@ namespace ResxEditor.Core.Views
 			ResourceList = new ResourceList ();
 			ResourceControlBar = new ResourceControlBar ();
 
-			ResourceControlBar.OnAddResource += (sender, e) => {
-				if (this.OnAddResource != null)
-					this.OnAddResource (this, e);
-			};
-			ResourceControlBar.OnRemoveResource += (sender, e) => {
-				if (OnRemoveResource != null)
-					OnRemoveResource (this, e);
-			};
+			ResourceControlBar.OnAddResource += (sender, e) => OnAddResource (this, e);
+			ResourceControlBar.OnRemoveResource += (sender, e) => OnRemoveResource (this, e);
 
 			ScrolledWindow listContainer = new ScrolledWindow ();
 			listContainer.Add (ResourceList);
 
-			this.PackStart (ResourceControlBar, false, true, 5);
-			this.PackEnd (listContainer);
+			PackStart (ResourceControlBar, false, true, 5);
+			PackEnd (listContainer);
 		}
 
 		public event EventHandler OnAddResource;

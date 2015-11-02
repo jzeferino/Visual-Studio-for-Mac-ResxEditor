@@ -36,14 +36,8 @@ namespace ResxEditor.Core.Views
 			AddResourceButton = new AddResourceButton ();
 			RemoveResourceButton = new RemoveResourceButton ();
 
-			AddResourceButton.Clicked += (sender, e) => {
-				if (OnAddResource != null)
-					OnAddResource (this, e);
-			};
-			RemoveResourceButton.Clicked += (sender, e) => {
-				if (OnRemoveResource != null)
-					OnRemoveResource (this, e);
-			};
+			AddResourceButton.Clicked += (sender, e) => OnAddResource (this, e);
+			RemoveResourceButton.Clicked += (sender, e) => OnRemoveResource (this, e);
 
 			PackStart (AddResourceButton, true, true, 5);
 			PackEnd (RemoveResourceButton, true, true, 5);

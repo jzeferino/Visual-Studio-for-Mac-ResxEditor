@@ -36,14 +36,10 @@ namespace ResxEditor.Core.Views
 			ValueColumn.AddAttribute ("text", 1);
 
 			NameColumn.Edited += (_, e) => {
-				if (OnNameEdited != null)
-					OnNameEdited(this, e);
+				OnNameEdited(this, e);
 				SetCursor (new TreePath (e.Path), ValueColumn, true);
 			};
-			ValueColumn.Edited += (_, e) => {
-				if (OnValueEdited != null)
-					OnValueEdited(this, e);
-			};
+			ValueColumn.Edited += (_, e) => OnValueEdited (this, e);
 		}
 
 		public TreeSelection GetSelectedResource () {

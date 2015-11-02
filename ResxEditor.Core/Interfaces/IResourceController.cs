@@ -6,6 +6,7 @@ namespace ResxEditor.Core.Interfaces
 
 	public interface IResourceController
 	{
+		event EventHandler<bool> OnDirtyChanged;
 		event EventHandler OnFileSaved;
 
 		string Filename {
@@ -29,8 +30,10 @@ namespace ResxEditor.Core.Interfaces
 		}
 
 		void AddNewResource();
-		bool RemoveCurrentResource();
+		void RemoveCurrentResource();
+
 		void Load(string fileName);
+		void Save(string fileName);
 	}
 
 }

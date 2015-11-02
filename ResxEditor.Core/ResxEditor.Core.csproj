@@ -7,7 +7,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ResxEditor.Core</RootNamespace>
     <AssemblyName>ResxEditor.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +79,7 @@
     <Compile Include="Models\ResourceFileHandler.cs" />
     <Compile Include="Interfaces\IResourceFileHandler.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\ResourceHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
