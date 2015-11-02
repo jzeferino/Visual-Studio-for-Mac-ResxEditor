@@ -12,7 +12,6 @@ namespace ResxEditor.Core.Controllers
 	public class ResourceController : IResourceController, IDisposable
 	{
 		public event EventHandler<bool> OnDirtyChanged;
-		public event EventHandler OnFileSaved;
 
 		ResourceHandler m_resxHandler;
 

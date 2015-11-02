@@ -11,17 +11,8 @@ using ResxEditor.Core.Interfaces;
 namespace ResxEditor.Core.Models
 {
 	public class ResourceListStore : ListStore, IResourceListStore {
-		ResXResourceWriter resourceWriter;
 
-		public ResourceListStore() : base(typeof(string), typeof(string))
-		{
-//			resourceWriter = new ResXResourceWriter (filename);
-////			resourceWriter.Close ();
-//			ResXResourceReader resourceReader = new ResXResourceReader (filename);
-//			IDictionaryEnumerator dict = resourceReader.GetEnumerator();
-//			while (dict.MoveNext ())
-//				this.AppendValues (new ResourceModel(dict.Key as string, dict.Value as string));
-		}
+		public ResourceListStore() : base(typeof(string), typeof(string)) {}
 
 		public void AppendValues(IResourceModel item) {
 			this.AppendValues (item.Name, item.Value);

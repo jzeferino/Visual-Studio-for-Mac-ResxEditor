@@ -7,7 +7,6 @@ namespace ResxEditor.Core.Interfaces
 	public interface IResourceController
 	{
 		event EventHandler<bool> OnDirtyChanged;
-		event EventHandler OnFileSaved;
 
 		string Filename {
 			get;
