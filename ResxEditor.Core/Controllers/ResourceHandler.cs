@@ -6,11 +6,8 @@ using System.Resources;
 
 namespace ResxEditor.Core.Controllers
 {
-	public class ResourceHandler : IDisposable
+	public class ResourceHandler
 	{
-		ResXResourceReader m_resxReader;
-		ResXResourceWriter m_resxWriter;
-
 		public List<ResXDataNode> Resources {
 			get;
 			private set;
@@ -19,15 +16,13 @@ namespace ResxEditor.Core.Controllers
 		public ResourceHandler (string fileName)
 		{
 			Resources = new List<ResXDataNode> ();
-			m_resxReader = new ResXResourceReader (fileName) { UseResXDataNodes = true };
-
-			LoadResources ();
-
-			m_resxReader.Close ();
+			using (var reader = new ResXResourceReader (fileName) { UseResXDataNodes = true }) {
+				LoadResources (reader);
+			}
 		}
 
-		void LoadResources() {
-			IDictionaryEnumerator enumerator = m_resxReader.GetEnumerator ();
+		void LoadResources(ResXResourceReader resxReader) {
+			IDictionaryEnumerator enumerator = resxReader.GetEnumerator ();
 			while (enumerator.MoveNext ()) {
 				Resources.Add (enumerator.Value as ResXDataNode);
 			}
@@ -42,26 +37,15 @@ namespace ResxEditor.Core.Controllers
 		}
 
 		public void WriteToFile(string fileName) {
-			m_resxWriter = new ResXResourceWriter (fileName);
+			using (var resxWriter = new ResXResourceWriter (fileName)) {
 
-			Resources.ForEach (m_resxWriter.AddResource);
+				Resources.ForEach (resxWriter.AddResource);
 
-			if (Resources.Count == 0) {
-				m_resxWriter.AddMetadata ("", "");
+				if (Resources.Count == 0) {
+					resxWriter.AddMetadata ("", "");
+				}
 			}
-
-			m_resxWriter.Close();
 		}
-
-		#region IDisposable implementation
-
-		public void Dispose ()
-		{
-			m_resxReader.Close ();
-			m_resxWriter.Close ();
-		}
-
-		#endregion
 	}
 }
 

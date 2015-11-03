@@ -9,7 +9,7 @@ using System.ComponentModel.Design;
 
 namespace ResxEditor.Core.Controllers
 {
-	public class ResourceController : IResourceController, IDisposable
+	public class ResourceController : IResourceController
 	{
 		public event EventHandler<bool> OnDirtyChanged;
 
@@ -124,15 +124,6 @@ namespace ResxEditor.Core.Controllers
 			m_resxHandler.WriteToFile (fileName);
 			OnDirtyChanged(this, false);
 		}
-
-		#region IDisposable implementation
-
-		public void Dispose ()
-		{
-			m_resxHandler.Dispose ();
-		}
-
-		#endregion
 	}
 }
 
