@@ -5,11 +5,14 @@ using Mono.Addins.Description;
 [assembly:Addin (
 	"ResxEditor", 
 	Namespace = "ResxEditor",
-	Version = "1.0"
+	Version = "0.0.1"
 )]
 
 [assembly:AddinName ("ResxEditor")]
 [assembly:AddinCategory ("IDE extensions")]
-[assembly:AddinDescription ("ResxEditor")]
-[assembly:AddinAuthor ("calebmorris")]
+[assembly:AddinAuthor ("Caleb Morris")]
+[assembly:AddinDescription ("Resx editor for simplified resource handling")]
 
+//AssemblyName assemblyeInfo = AssemblyName.GetAssemblyName("ResxEditor.Core.dll");
+
+[assembly:ImportAddinAssembly("ResxEditor.Core.dll")]
