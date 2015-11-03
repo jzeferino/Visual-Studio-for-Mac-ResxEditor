@@ -18,11 +18,6 @@ namespace ResxEditor.Core.Interfaces
 			set;
 		}
 
-		IResourceFileHandler FileHandler {
-			get;
-			set;
-		}
-
 		ResourceEditorView ResourceEditorView {
 			get;
 			set;

@@ -11,6 +11,11 @@
 			get;
 			set;
 		}
+
+		string Comment {
+			get;
+			set;
+		}
 	}
 }
 

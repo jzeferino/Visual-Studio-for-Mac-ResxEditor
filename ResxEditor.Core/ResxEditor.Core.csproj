@@ -73,10 +73,9 @@
     <Compile Include="Interfaces\IResourceController.cs" />
     <Compile Include="Interfaces\IResourceListStore.cs" />
     <Compile Include="Interfaces\IResourceModel.cs" />
-    <Compile Include="Models\ResourceFileHandler.cs" />
-    <Compile Include="Interfaces\IResourceFileHandler.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ResourceHandler.cs" />
+    <Compile Include="Enums\ResourceColumns.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -85,6 +84,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\resx-512.png" />

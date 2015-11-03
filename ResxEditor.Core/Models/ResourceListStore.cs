@@ -12,10 +12,10 @@ namespace ResxEditor.Core.Models
 {
 	public class ResourceListStore : ListStore, IResourceListStore {
 
-		public ResourceListStore() : base(typeof(string), typeof(string)) {}
+		public ResourceListStore() : base(typeof(string), typeof(string), typeof(string)) {}
 
 		public void AppendValues(IResourceModel item) {
-			this.AppendValues (item.Name, item.Value);
+			this.AppendValues (item.Name, item.Value, item.Comment);
 		}
 
 		public bool SetColumnValue(string path, int column, string value) {
@@ -33,7 +33,7 @@ namespace ResxEditor.Core.Models
 			if (! this.GetIter(out iter, new TreePath(path))) {
 				return false;
 			} else {
-				this.SetValue (iter, 0, nextName);
+				this.SetValue (iter, (int)Enums.ResourceColumns.Name, nextName);
 				return true;
 			}
 		}
@@ -43,13 +43,27 @@ namespace ResxEditor.Core.Models
 			if (! this.GetIter(out iter, new TreePath(path))) {
 				return false;
 			} else {
-				this.SetValue (iter, 1, nextValue);
+				this.SetValue (iter, (int)Enums.ResourceColumns.Value, nextValue);
+				return true;
+			}
+		}
+
+		public bool SetComment(string path, string nextValue) {
+			TreeIter iter;
+			if (! this.GetIter(out iter, new TreePath(path))) {
+				return false;
+			} else {
+				this.SetValue (iter, (int)Enums.ResourceColumns.Comment, nextValue);
 				return true;
 			}
 		}
 
 		public string GetName(TreeIter iter) {
-			return this.GetValue (iter, 0) as string;
+			return this.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
+		}
+
+		public string GetValue (TreeIter iter) {
+			return this.GetValue (iter, (int)Enums.ResourceColumns.Value) as string;
 		}
 	}
 

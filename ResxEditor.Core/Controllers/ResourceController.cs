@@ -54,6 +54,18 @@ namespace ResxEditor.Core.Controllers
 				Store.SetValue (e.Path, e.NextText);
 				OnDirtyChanged (this, true);
 			};
+			ResourceEditorView.ResourceList.OnCommentEdited += (_, e) => {
+				TreeIter iter;
+				Store.GetIter(out iter, new TreePath(e.Path));
+				string name = Store.GetName(iter);
+				string value = Store.GetValue(iter);
+
+				m_resxHandler.RemoveResource(name);
+				m_resxHandler.AddResource(name, value, e.NextText);
+
+				Store.SetComment (e.Path, e.NextText);
+				OnDirtyChanged (this, true);
+			};
 		}
 
 		public void AddNewResource() {
@@ -88,11 +100,6 @@ namespace ResxEditor.Core.Controllers
 			set;
 		}
 
-		public IResourceFileHandler FileHandler {
-			get;
-			set;
-		}
-
 		public ResourceEditorView ResourceEditorView {
 			get;
 			set;
@@ -106,12 +113,7 @@ namespace ResxEditor.Core.Controllers
 				if (resource.FileRef == null) {
 					object value = resource.GetValue((ITypeResolutionService) null);
 					var str = value as string;
-//					if (str != null) {
-						Store.AppendValues (new ResourceModel (resource.Name, str));
-//					} else {
-//						throw new NotImplementedException();
-//					}
-
+					Store.AppendValues (new ResourceModel (resource.Name, str, resource.Comment));
 				} else {
 					throw new NotImplementedException();
 				}

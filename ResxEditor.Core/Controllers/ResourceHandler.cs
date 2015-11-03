@@ -19,7 +19,7 @@ namespace ResxEditor.Core.Controllers
 		public ResourceHandler (string fileName)
 		{
 			Resources = new List<ResXDataNode> ();
-			m_resxReader = new ResXResourceReader (fileName);
+			m_resxReader = new ResXResourceReader (fileName) { UseResXDataNodes = true };
 
 			LoadResources ();
 
@@ -29,7 +29,7 @@ namespace ResxEditor.Core.Controllers
 		void LoadResources() {
 			IDictionaryEnumerator enumerator = m_resxReader.GetEnumerator ();
 			while (enumerator.MoveNext ()) {
-				Resources.Add (new ResXDataNode (enumerator.Key as string, enumerator.Value));
+				Resources.Add (enumerator.Value as ResXDataNode);
 			}
 		}
 
@@ -37,8 +37,8 @@ namespace ResxEditor.Core.Controllers
 			return Resources.RemoveAll (resource => resource.Name == name);
 		}
 
-		public void AddResource(string name, string value) {
-			Resources.Add (new ResXDataNode (name, value));
+		public void AddResource(string name, string value, string comment = null) {
+			Resources.Add (new ResXDataNode (name, value) { Comment = comment });
 		}
 
 		public void WriteToFile(string fileName) {
