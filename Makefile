@@ -8,6 +8,7 @@ clean-build:
 	rm -Rfv **/{obj,bin}
 
 clean-addins:
+	rm -fv ResxEditor.*.mpack
 	rm -fv **/ResxEditor.*.mpack
 
 build-release:
