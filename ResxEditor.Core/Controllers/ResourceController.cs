@@ -28,9 +28,7 @@ namespace ResxEditor.Core.Controllers
 
 		void AttachListeners () {
 			ResourceEditorView.OnAddResource += (_, __) => AddNewResource ();
-			ResourceEditorView.OnRemoveResource += (_, __) => {
-				RemoveCurrentResource ();
-			};
+			ResourceEditorView.OnRemoveResource += (_, __) => RemoveCurrentResource ();
 
 			ResourceEditorView.ResourceList.OnNameEdited += (_, e) => {
 				TreeIter iter;
