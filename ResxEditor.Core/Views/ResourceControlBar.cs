@@ -33,14 +33,17 @@ namespace ResxEditor.Core.Views
 
 		public ResourceControlBar ()
 		{
+			Layout = Gtk.ButtonBoxStyle.Start;
+			Spacing = 10;
+
 			AddResourceButton = new AddResourceButton ();
 			RemoveResourceButton = new RemoveResourceButton ();
 
 			AddResourceButton.Clicked += (sender, e) => OnAddResource (this, e);
 			RemoveResourceButton.Clicked += (sender, e) => OnRemoveResource (this, e);
 
-			PackStart (AddResourceButton, true, true, 5);
-			PackEnd (RemoveResourceButton, true, true, 5);
+			PackStart (AddResourceButton, false, false, 10);
+			PackEnd (RemoveResourceButton, false, false, 10);
 		}
 	}
 }
