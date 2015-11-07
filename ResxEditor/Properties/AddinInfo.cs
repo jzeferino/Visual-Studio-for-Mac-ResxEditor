@@ -10,7 +10,5 @@
 [assembly:AddinCategory ("IDE extensions")]
 [assembly:AddinAuthor ("Caleb Morris")]
 [assembly:AddinDescription ("Resx editor for simplified resource handling")]
-
-//AssemblyName assemblyeInfo = AssemblyName.GetAssemblyName("ResxEditor.Core.dll");
-
+[assembly:AddinUrl("https://github.com/CalebMorris/Xamarin-ResxEditor")]
 [assembly:ImportAddinAssembly("ResxEditor.Core.dll")]
