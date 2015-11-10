@@ -1,0 +1,7 @@
+<AddinProject appVersion="5.0">
+  <Project platforms="Mac Linux Win32">
+    <AddinFile>ResxEditor/bin/Release/ResxEditor.dll</AddinFile>
+    <BuildFile>ResxEditor.sln</BuildFile>
+    <BuildConfiguration>Release</BuildConfiguration>
+  </Project>
+</AddinProject>
