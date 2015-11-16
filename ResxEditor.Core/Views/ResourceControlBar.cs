@@ -31,6 +31,11 @@ namespace ResxEditor.Core.Views
 			set;
 		}
 
+		public Gtk.Entry FilterEntry {
+			get;
+			set;
+		}
+
 		public ResourceControlBar ()
 		{
 			Layout = Gtk.ButtonBoxStyle.Start;
@@ -38,12 +43,14 @@ namespace ResxEditor.Core.Views
 
 			AddResourceButton = new AddResourceButton ();
 			RemoveResourceButton = new RemoveResourceButton ();
+			FilterEntry = new Gtk.Entry ();
 
 			AddResourceButton.Clicked += (sender, e) => OnAddResource (this, e);
 			RemoveResourceButton.Clicked += (sender, e) => OnRemoveResource (this, e);
 
 			PackStart (AddResourceButton, false, false, 10);
-			PackEnd (RemoveResourceButton, false, false, 10);
+			PackStart (RemoveResourceButton, false, false, 10);
+			PackEnd (FilterEntry);
 		}
 	}
 }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Resources;
 using Gtk;
 using ResxEditor.Core.Interfaces;
 using ResxEditor.Core.Models;
 using ResxEditor.Core.Views;
-using System.Collections;
 using System.ComponentModel.Design;
 
 namespace ResxEditor.Core.Controllers
@@ -21,7 +19,9 @@ namespace ResxEditor.Core.Controllers
 
 //			ResourceList = resourceList;
 			Store = new ResourceListStore ();
-			ResourceEditorView.ResourceList.Model = (TreeModel)Store;
+			Filter =  new ResourceFilter(ResourceEditorView.ResourceControlBar.FilterEntry, Store as ListStore, null);
+			ResourceEditorView.ResourceControlBar.FilterEntry.Changed += (_, e) => Filter.Refilter ();
+			ResourceEditorView.ResourceList.Model = Filter;
 
 			AttachListeners ();
 		}
@@ -89,6 +89,11 @@ namespace ResxEditor.Core.Controllers
 		}
 
 		public string Filename {
+			get;
+			set;
+		}
+
+		ResourceFilter Filter {
 			get;
 			set;
 		}

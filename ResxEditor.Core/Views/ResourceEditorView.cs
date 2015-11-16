@@ -30,7 +30,7 @@ namespace ResxEditor.Core.Views
 			set;
 		}
 
-		ResourceControlBar ResourceControlBar {
+		public ResourceControlBar ResourceControlBar {
 			get;
 			set;
 		}
