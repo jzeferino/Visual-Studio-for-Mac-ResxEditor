@@ -1,9 +1,5 @@
 using System;
 using Gtk;
-using ResxEditor.Core.Interfaces;
-using ResxEditor.Core.Models;
-using ResxEditor.Core.Views;
-using System.ComponentModel.Design;
 
 namespace ResxEditor.Core.Models
 {
@@ -11,14 +7,15 @@ namespace ResxEditor.Core.Models
 	{
 		public ResourceFilter(Entry filterEntry, TreeModel childModel, TreePath root) : base(childModel, root) {
 			VisibleFunc = new TreeModelFilterVisibleFunc ((model, iter) => {
-				var key = model.GetValue(iter, 0).ToString();
-				var value = model.GetValue(iter, 1).ToString();
-				var comment = model.GetValue(iter, 2).ToString();
+				var key = model.GetValue(iter, 0) as string;
+				var value = model.GetValue(iter, 1);
+				var comment = model.GetValue(iter, 2);
 				if (
 					string.IsNullOrEmpty(filterEntry.Text) ||
+					string.IsNullOrEmpty(key) ||
 					key.Contains(filterEntry.Text) ||
-					value.Contains(filterEntry.Text) ||
-					comment.Contains(filterEntry.Text)
+					value != null && value.ToString().Contains(filterEntry.Text) ||
+					comment != null && comment.ToString().Contains(filterEntry.Text)
 				) {
 					return true;
 				}

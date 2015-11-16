@@ -21,6 +21,10 @@ namespace ResxEditor.Core.Controllers
 			Store = new ResourceListStore ();
 			Filter =  new ResourceFilter(ResourceEditorView.ResourceControlBar.FilterEntry, Store as ListStore, null);
 			ResourceEditorView.ResourceControlBar.FilterEntry.Changed += (_, e) => Filter.Refilter ();
+			ResourceEditorView.ResourceList.OnResourceAdded += (_, e) => {
+				ResourceEditorView.ResourceControlBar.FilterEntry.Text = "";
+				Filter.Refilter();
+			};
 			ResourceEditorView.ResourceList.Model = Filter;
 
 			AttachListeners ();

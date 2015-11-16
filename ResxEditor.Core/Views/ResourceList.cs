@@ -15,6 +15,7 @@ namespace ResxEditor.Core.Views
 		public event EventHandler<ResourceEditedEventArgs> OnNameEdited;
 		public event EventHandler<ResourceEditedEventArgs> OnValueEdited;
 		public event EventHandler<ResourceEditedEventArgs> OnCommentEdited;
+		public event EventHandler<string> OnResourceAdded;
 
 		public LocalizationColumn NameColumn {
 			get;
@@ -45,6 +46,7 @@ namespace ResxEditor.Core.Views
 
 			NameColumn.Edited += (_, e) => {
 				OnNameEdited(this, e);
+				OnResourceAdded(this, e.NextText);
 				SetCursor (new TreePath (e.Path), ValueColumn, true);
 			};
 			ValueColumn.Edited += (_, e) => {
