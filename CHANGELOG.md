@@ -8,3 +8,6 @@
 ## [v0.0.3](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.0.3) (2015-11-15)
   - Resource filtering
 
+## [v0.1.0](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.0.3) (2015-11-15)
+  - Filter works with new resources (clears)
+
