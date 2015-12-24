@@ -22,9 +22,6 @@ namespace ResxEditor.Core.Controllers
 
 		public TreeModel Model {
 			get {
-				if (IsFilterable) {
-					return ResourceFilter;
-				}
 				return BaseModel;
 			}
 		}
@@ -76,7 +73,7 @@ namespace ResxEditor.Core.Controllers
 		}
 
 		public string GetName(TreeIter iter) {
-			return Model.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
+			return BaseModel.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
 		}
 
 		public string GetValue (TreeIter iter) {
@@ -85,17 +82,17 @@ namespace ResxEditor.Core.Controllers
 
 		public bool GetIter (out TreeIter iter, TreePath path)
 		{
-			throw new NotImplementedException ();
+			return BaseModel.GetIter (out iter, path);
 		}
 
 		public TreeIter Prepend ()
 		{
-			throw new NotImplementedException ();
+			return BaseModel.Prepend ();
 		}
 
 		public TreePath GetPath (TreeIter iter)
 		{
-			throw new NotImplementedException ();
+			return BaseModel.GetPath (iter);
 		}
 
 		public bool Remove (TreePath path) {
