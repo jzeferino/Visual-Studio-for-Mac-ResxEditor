@@ -8,6 +8,9 @@
 ## [v0.0.3](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.0.3) (2015-11-15)
   - Resource filtering
 
-## [v0.1.0](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.0.3) (2015-11-15)
+## [v0.1.0](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.1.0) (2015-11-15)
   - Filter works with new resources (clears)
+
+## [v0.1.1](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.1.1) (2015-11-15)
+  - Fixed defect #11 - Able to delete row
 
