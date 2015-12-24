@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Resources;
-using Gtk;
-using ResxEditor.Core.Interfaces;
+﻿using Gtk;
 
 //Image img = Image.FromFile("en-AU.jpg");
 //ResXResourceWriter rsxw = new ResXResourceWriter("en-AU.resx"); 
@@ -10,61 +7,10 @@ using ResxEditor.Core.Interfaces;
 
 namespace ResxEditor.Core.Models
 {
-	public class ResourceListStore : ListStore, IResourceListStore {
+	public class ResourceListStore : ListStore {
 
 		public ResourceListStore() : base(typeof(string), typeof(string), typeof(string)) {}
 
-		public void AppendValues(IResourceModel item) {
-			this.AppendValues (item.Name, item.Value, item.Comment);
-		}
-
-		public bool SetColumnValue(string path, int column, string value) {
-			TreeIter iter;
-			if (! this.GetIter(out iter, new TreePath(path))) {
-				return false;
-			} else {
-				this.SetValue (iter, column, value);
-				return true;
-			}
-		}
-
-		public bool SetName(string path, string nextName) {
-			TreeIter iter;
-			if (! this.GetIter(out iter, new TreePath(path))) {
-				return false;
-			} else {
-				this.SetValue (iter, (int)Enums.ResourceColumns.Name, nextName);
-				return true;
-			}
-		}
-
-		public bool SetValue(string path, string nextValue) {
-			TreeIter iter;
-			if (! this.GetIter(out iter, new TreePath(path))) {
-				return false;
-			} else {
-				this.SetValue (iter, (int)Enums.ResourceColumns.Value, nextValue);
-				return true;
-			}
-		}
-
-		public bool SetComment(string path, string nextValue) {
-			TreeIter iter;
-			if (! this.GetIter(out iter, new TreePath(path))) {
-				return false;
-			} else {
-				this.SetValue (iter, (int)Enums.ResourceColumns.Comment, nextValue);
-				return true;
-			}
-		}
-
-		public string GetName(TreeIter iter) {
-			return this.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
-		}
-
-		public string GetValue (TreeIter iter) {
-			return this.GetValue (iter, (int)Enums.ResourceColumns.Value) as string;
-		}
 	}
 
 }

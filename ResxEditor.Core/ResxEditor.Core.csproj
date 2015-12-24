@@ -77,6 +77,8 @@
     <Compile Include="Controllers\ResourceHandler.cs" />
     <Compile Include="Enums\ResourceColumns.cs" />
     <Compile Include="Models\ResourceFilter.cs" />
+    <Compile Include="Interfaces\IFilterableResourceStore.cs" />
+    <Compile Include="Controllers\ResourceStoreController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -10,22 +10,20 @@ namespace ResxEditor.Core.Controllers
 	public class ResourceController : IResourceController
 	{
 		public event EventHandler<bool> OnDirtyChanged;
+		public event EventHandler RemoveFailed;
 
 		ResourceHandler m_resxHandler;
 
 		public ResourceController ()
 		{
 			ResourceEditorView = new ResourceEditorView ();
-
-//			ResourceList = resourceList;
-			Store = new ResourceListStore ();
-			Filter =  new ResourceFilter(ResourceEditorView.ResourceControlBar.FilterEntry, Store as ListStore, null);
-			ResourceEditorView.ResourceControlBar.FilterEntry.Changed += (_, e) => Filter.Refilter ();
+			StoreController = new ResourceStoreController(() => ResourceEditorView.ResourceControlBar.FilterEntry.Text);
+			ResourceEditorView.ResourceControlBar.FilterEntry.Changed += (_, e) => StoreController.Refilter ();
 			ResourceEditorView.ResourceList.OnResourceAdded += (_, e) => {
 				ResourceEditorView.ResourceControlBar.FilterEntry.Text = "";
-				Filter.Refilter();
+				StoreController.Refilter();
 			};
-			ResourceEditorView.ResourceList.Model = Filter;
+			ResourceEditorView.ResourceList.Model = StoreController.Model;
 
 			AttachListeners ();
 		}
@@ -36,58 +34,60 @@ namespace ResxEditor.Core.Controllers
 
 			ResourceEditorView.ResourceList.OnNameEdited += (_, e) => {
 				TreeIter iter;
-				Store.GetIter(out iter, new TreePath(e.Path));
-				string oldName = Store.GetName(iter);
+				StoreController.GetIter(out iter, new TreePath(e.Path));
+				string oldName = StoreController.GetName(iter);
 
 				m_resxHandler.RemoveResource(oldName);
 				m_resxHandler.AddResource(e.NextText, string.Empty);
 
-				Store.SetName (e.Path, e.NextText);
+				StoreController.SetName (e.Path, e.NextText);
 				OnDirtyChanged(this, true);
 			};
 			ResourceEditorView.ResourceList.OnValueEdited += (_, e) => {
 				TreeIter iter;
-				Store.GetIter(out iter, new TreePath(e.Path));
-				string name = Store.GetName(iter);
+				StoreController.GetIter(out iter, new TreePath(e.Path));
+				string name = StoreController.GetName(iter);
 
 				m_resxHandler.RemoveResource(name);
 				m_resxHandler.AddResource(name, e.NextText);
 
-				Store.SetValue (e.Path, e.NextText);
+				StoreController.SetValue (e.Path, e.NextText);
 				OnDirtyChanged (this, true);
 			};
 			ResourceEditorView.ResourceList.OnCommentEdited += (_, e) => {
 				TreeIter iter;
-				Store.GetIter(out iter, new TreePath(e.Path));
-				string name = Store.GetName(iter);
-				string value = Store.GetValue(iter);
+				StoreController.GetIter(out iter, new TreePath(e.Path));
+				string name = StoreController.GetName(iter);
+				string value = StoreController.GetValue(iter);
 
 				m_resxHandler.RemoveResource(name);
 				m_resxHandler.AddResource(name, value, e.NextText);
 
-				Store.SetComment (e.Path, e.NextText);
+				StoreController.SetComment (e.Path, e.NextText);
 				OnDirtyChanged (this, true);
 			};
 		}
 
 		public void AddNewResource() {
-			TreeIter iter = Store.Prepend();
-			TreePath path = Store.GetPath(iter);
+			TreeIter iter = StoreController.Prepend();
+			TreePath path = StoreController.GetPath(iter);
 			ResourceEditorView.ResourceList.SetCursor(path, ResourceEditorView.ResourceList.NameColumn, true);
 			OnDirtyChanged(this, true);
 		}
 
 		public void RemoveCurrentResource() {
 			TreeIter iter;
-			TreeSelection selection = ResourceEditorView.ResourceList.GetSelectedResource();
+			TreePath[] selectedPaths = ResourceEditorView.ResourceList.GetSelectedResource ().GetSelectedRows ();
 
-			if (selection.GetSelected (out iter)) {
-				string name = Store.GetName (iter);
-				if (m_resxHandler.RemoveResource (name) > 0) {
-
-					Store.Remove (ref iter);
-					OnDirtyChanged (this, true);
-
+			foreach (var selectedPath in selectedPaths) {
+				if (StoreController.Remove (selectedPath) && ResourceEditorView.ResourceList.Model.GetIter(out iter, selectedPath)) {
+					string name = StoreController.GetName (iter);
+					if (m_resxHandler.RemoveResource (name) > 0) {
+						OnDirtyChanged (this, true);
+					}
+				} else {
+					if (RemoveFailed != null)
+						RemoveFailed (this, null);
 				}
 			}
 		}
@@ -97,12 +97,7 @@ namespace ResxEditor.Core.Controllers
 			set;
 		}
 
-		ResourceFilter Filter {
-			get;
-			set;
-		}
-
-		public IResourceListStore Store {
+		public IResourceListStore StoreController {
 			get;
 			set;
 		}
@@ -120,7 +115,7 @@ namespace ResxEditor.Core.Controllers
 				if (resource.FileRef == null) {
 					object value = resource.GetValue((ITypeResolutionService) null);
 					var str = value as string;
-					Store.AppendValues (new ResourceModel (resource.Name, str, resource.Comment));
+					StoreController.AppendValues (new ResourceModel (resource.Name, str, resource.Comment));
 				} else {
 					throw new NotImplementedException();
 				}

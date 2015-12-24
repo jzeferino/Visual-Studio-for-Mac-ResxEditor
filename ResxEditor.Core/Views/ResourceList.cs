@@ -1,7 +1,5 @@
 ﻿using System;
 using Gtk;
-using ResxEditor.Core.Interfaces;
-using ResxEditor.Core.Models;
 
 namespace ResxEditor.Core.Views
 {

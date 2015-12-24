@@ -2,8 +2,11 @@
 
 namespace ResxEditor.Core.Interfaces
 {
-	public interface IResourceListStore
+	public interface IResourceListStore : IFilterableResourceStore
 	{
+		bool IsFilterable { get; }
+		TreeModel Model { get; }
+
 		void AppendValues (IResourceModel item);
 
 		bool SetName (string path, string nextName);
@@ -23,7 +26,7 @@ namespace ResxEditor.Core.Interfaces
 
 		TreePath GetPath (TreeIter iter);
 
-		bool Remove (ref TreeIter iter);
+		bool Remove (TreePath path);
 		#endregion
 	}
 }
