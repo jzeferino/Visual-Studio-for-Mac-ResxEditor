@@ -13,7 +13,7 @@ namespace ResxEditor.Core.Interfaces
 			set;
 		}
 
-		IResourceListStore Store {
+		IResourceListStore StoreController {
 			get;
 			set;
 		}
