@@ -35,7 +35,7 @@ namespace ResxEditor.Core.Controllers
 			ResourceEditorView.ResourceList.OnNameEdited += (_, e) => {
 				TreeIter iter;
 				StoreController.GetIter(out iter, new TreePath(e.Path));
-				string oldName = StoreController.GetName(iter);
+				string oldName = StoreController.GetName(new TreePath(e.Path));
 
 				m_resxHandler.RemoveResource(oldName);
 				m_resxHandler.AddResource(e.NextText, string.Empty);
@@ -46,7 +46,7 @@ namespace ResxEditor.Core.Controllers
 			ResourceEditorView.ResourceList.OnValueEdited += (_, e) => {
 				TreeIter iter;
 				StoreController.GetIter(out iter, new TreePath(e.Path));
-				string name = StoreController.GetName(iter);
+				string name = StoreController.GetName(new TreePath(e.Path));
 
 				m_resxHandler.RemoveResource(name);
 				m_resxHandler.AddResource(name, e.NextText);
@@ -57,7 +57,7 @@ namespace ResxEditor.Core.Controllers
 			ResourceEditorView.ResourceList.OnCommentEdited += (_, e) => {
 				TreeIter iter;
 				StoreController.GetIter(out iter, new TreePath(e.Path));
-				string name = StoreController.GetName(iter);
+				string name = StoreController.GetName(new TreePath(e.Path));
 				string value = StoreController.GetValue(iter);
 
 				m_resxHandler.RemoveResource(name);
@@ -76,18 +76,13 @@ namespace ResxEditor.Core.Controllers
 		}
 
 		public void RemoveCurrentResource() {
-			TreeIter iter;
 			TreePath[] selectedPaths = ResourceEditorView.ResourceList.GetSelectedResource ().GetSelectedRows ();
 
 			foreach (var selectedPath in selectedPaths) {
-				if (StoreController.Remove (selectedPath) && ResourceEditorView.ResourceList.Model.GetIter(out iter, selectedPath)) {
-					string name = StoreController.GetName (iter);
-					if (m_resxHandler.RemoveResource (name) > 0) {
-						OnDirtyChanged (this, true);
-					}
-				} else {
-					if (RemoveFailed != null)
-						RemoveFailed (this, null);
+				string name = StoreController.GetName (selectedPath);
+				StoreController.Remove (selectedPath);
+				if (m_resxHandler.RemoveResource (name) > 0) {
+					OnDirtyChanged (this, true);
 				}
 			}
 		}

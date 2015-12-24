@@ -22,6 +22,9 @@ namespace ResxEditor.Core.Controllers
 
 		public TreeModel Model {
 			get {
+				if (IsFilterable) {
+					return ResourceFilter;
+				}
 				return BaseModel;
 			}
 		}
@@ -72,7 +75,10 @@ namespace ResxEditor.Core.Controllers
 			}
 		}
 
-		public string GetName(TreeIter iter) {
+		public string GetName(TreePath path) {
+			TreeIter iter;
+
+			BaseModel.GetIter (out iter, path);
 			return BaseModel.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
 		}
 
@@ -95,6 +101,10 @@ namespace ResxEditor.Core.Controllers
 			return BaseModel.GetPath (iter);
 		}
 
+		/// <summary>
+		/// Remove the specified resource at the path
+		/// </summary>
+		/// <param name="path">Returns true if the path is a valid path.</param>
 		public bool Remove (TreePath path) {
 			TreeIter iter;
 			if (BaseModel.GetIter (out iter, path)) {

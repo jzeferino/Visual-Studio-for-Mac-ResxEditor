@@ -17,7 +17,7 @@ namespace ResxEditor.Core.Interfaces
 
 		bool GetIter (out TreeIter iter, TreePath path);
 
-		string GetName (TreeIter iter);
+		string GetName (TreePath path);
 
 		string GetValue (TreeIter iter);
 
