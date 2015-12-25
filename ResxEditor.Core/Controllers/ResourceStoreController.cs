@@ -78,17 +78,18 @@ namespace ResxEditor.Core.Controllers
 		public string GetName(TreePath path) {
 			TreeIter iter;
 
-			BaseModel.GetIter (out iter, path);
-			return BaseModel.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
+			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Name) as string : null;
 		}
 
-		public string GetValue (TreeIter iter) {
-			return BaseModel.GetValue (iter, (int)Enums.ResourceColumns.Value) as string;
+		public string GetValue (TreePath path) {
+			TreeIter iter;
+
+			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Value) as string : null;
 		}
 
 		public bool GetIter (out TreeIter iter, TreePath path)
 		{
-			return BaseModel.GetIter (out iter, path);
+			return Model.GetIter (out iter, path);
 		}
 
 		public TreeIter Prepend ()

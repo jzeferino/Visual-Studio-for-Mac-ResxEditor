@@ -19,7 +19,7 @@ namespace ResxEditor.Core.Interfaces
 
 		string GetName (TreePath path);
 
-		string GetValue (TreeIter iter);
+		string GetValue (TreePath path);
 
 		#region ListStore
 		TreeIter Prepend ();

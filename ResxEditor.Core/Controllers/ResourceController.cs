@@ -44,8 +44,6 @@ namespace ResxEditor.Core.Controllers
 				OnDirtyChanged(this, true);
 			};
 			ResourceEditorView.ResourceList.OnValueEdited += (_, e) => {
-				TreeIter iter;
-				StoreController.GetIter(out iter, new TreePath(e.Path));
 				string name = StoreController.GetName(new TreePath(e.Path));
 
 				m_resxHandler.RemoveResource(name);
@@ -55,10 +53,9 @@ namespace ResxEditor.Core.Controllers
 				OnDirtyChanged (this, true);
 			};
 			ResourceEditorView.ResourceList.OnCommentEdited += (_, e) => {
-				TreeIter iter;
-				StoreController.GetIter(out iter, new TreePath(e.Path));
-				string name = StoreController.GetName(new TreePath(e.Path));
-				string value = StoreController.GetValue(iter);
+				TreePath path = new TreePath(e.Path);
+				string name = StoreController.GetName(path);
+				string value = StoreController.GetValue(path);
 
 				m_resxHandler.RemoveResource(name);
 				m_resxHandler.AddResource(name, value, e.NextText);
