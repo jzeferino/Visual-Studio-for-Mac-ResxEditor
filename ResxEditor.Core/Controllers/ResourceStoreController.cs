@@ -108,11 +108,14 @@ namespace ResxEditor.Core.Controllers
 		/// <param name="path">Returns true if the path is a valid path.</param>
 		public bool Remove (TreePath path) {
 			TreeIter iter;
-			if (BaseModel.GetIter (out iter, path)) {
-				return BaseModel.Remove (ref iter);
+			if (IsFilterable) {
+				ResourceFilter.GetIter (out iter, path);
+				iter = ResourceFilter.ConvertIterToChildIter (iter);
 			} else {
-				return false;
+				BaseModel.GetIter (out iter, path);
 			}
+
+			return BaseModel.Remove (ref iter);
 		}
 
 		#region IFilter
