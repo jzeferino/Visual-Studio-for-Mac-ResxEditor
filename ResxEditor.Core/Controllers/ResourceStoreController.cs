@@ -75,36 +75,47 @@ namespace ResxEditor.Core.Controllers
 			}
 		}
 
-		public string GetName(TreeIter iter) {
-			return Model.GetValue (iter, (int)Enums.ResourceColumns.Name) as string;
+		public string GetName(TreePath path) {
+			TreeIter iter;
+
+			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Name) as string : null;
 		}
 
-		public string GetValue (TreeIter iter) {
-			return BaseModel.GetValue (iter, (int)Enums.ResourceColumns.Value) as string;
+		public string GetValue (TreePath path) {
+			TreeIter iter;
+
+			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Value) as string : null;
 		}
 
 		public bool GetIter (out TreeIter iter, TreePath path)
 		{
-			throw new NotImplementedException ();
+			return Model.GetIter (out iter, path);
 		}
 
 		public TreeIter Prepend ()
 		{
-			throw new NotImplementedException ();
+			return BaseModel.Prepend ();
 		}
 
 		public TreePath GetPath (TreeIter iter)
 		{
-			throw new NotImplementedException ();
+			return BaseModel.GetPath (iter);
 		}
 
+		/// <summary>
+		/// Remove the specified resource at the path
+		/// </summary>
+		/// <param name="path">Returns true if the path is a valid path.</param>
 		public bool Remove (TreePath path) {
 			TreeIter iter;
-			if (BaseModel.GetIter (out iter, path)) {
-				return BaseModel.Remove (ref iter);
+			if (IsFilterable) {
+				ResourceFilter.GetIter (out iter, path);
+				iter = ResourceFilter.ConvertIterToChildIter (iter);
 			} else {
-				return false;
+				BaseModel.GetIter (out iter, path);
 			}
+
+			return BaseModel.Remove (ref iter);
 		}
 
 		#region IFilter
