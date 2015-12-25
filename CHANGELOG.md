@@ -14,3 +14,6 @@
 ## [v0.1.1](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.1.1) (2015-11-15)
   - Fixed defect #11 - Able to delete row
 
+## [v0.1.2](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.1.2) (2015-11-15)
+  - Fixed defect #14 - Able to add and remove with filterable
+
