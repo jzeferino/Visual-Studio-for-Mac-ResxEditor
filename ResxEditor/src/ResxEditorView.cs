@@ -1,12 +1,13 @@
 ﻿using System;
 using Gtk;
 using MonoDevelop.Ide.Gui;
+using MonoDevelop.Ide;
 using ResxEditor.Core.Interfaces;
 using ResxEditor.Core.Controllers;
 
 namespace ResxEditor
 {
-	public class ResxEditorView : AbstractViewContent
+	public class ResxEditorView : AbstractViewContent, IAttachableViewContent
 	{
 		IResourceController Controller {
 			get;
@@ -18,7 +19,13 @@ namespace ResxEditor
 			set;
 		}
 
-		public ResxEditorView() {
+		Document Document {
+			get;
+			set;
+		}
+
+		public ResxEditorView(Document document = null) {
+			Document = document;
 			Controller = new ResourceController ();
 			HPaned container = new HPaned ();
 			container.Add (Controller.ResourceEditorView);
@@ -76,6 +83,54 @@ namespace ResxEditor
 		public override void Save (string fileName)
 		{
 			Controller.Save (fileName);
+		}
+
+		#endregion
+
+		#region IAttachableViewContent
+		public override string TabPageLabel {
+			get { return "ResxEditor"; }
+		}
+
+		void IAttachableViewContent.Selected ()
+		{
+			if (Document == null)
+				return;
+
+			var buffer = Document.GetContent< MonoDevelop.Ide.Editor.TextEditor >();
+
+//			info.Start ();
+//			ComparisonWidget.UpdateLocalText ();
+//			var buffer = info.Document.GetContent<MonoDevelop.Ide.Editor.TextEditor> ();
+//			if (buffer != null) {
+//				var loc = buffer.CaretLocation;
+//				int line = loc.Line < 1 ? 1 : loc.Line;
+//				int column = loc.Column < 1 ? 1 : loc.Column;
+//				ComparisonWidget.OriginalEditor.SetCaretTo (line, column);
+//			}
+//
+//			if (ComparisonWidget.Allocation.Height == 1 && ComparisonWidget.Allocation.Width == 1) {
+//				ComparisonWidget.SizeAllocated += HandleComparisonWidgetSizeAllocated;
+//			} else {
+//				HandleComparisonWidgetSizeAllocated (null, new Gtk.SizeAllocatedArgs ());
+//			}
+//
+//			widget.UpdatePatchView ();
+		}
+
+		void IAttachableViewContent.Deselected ()
+		{
+//			throw new NotImplementedException ();
+		}
+
+		void IAttachableViewContent.BeforeSave ()
+		{
+//			throw new NotImplementedException ();
+		}
+
+		void IAttachableViewContent.BaseContentChanged ()
+		{
+//			throw new NotImplementedException ();
 		}
 
 		#endregion

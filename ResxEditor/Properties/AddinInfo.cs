@@ -12,3 +12,5 @@
 [assembly:AddinDescription ("Resx editor for simplified resource handling.\n Currently only works with string resources.")]
 [assembly:AddinUrl("https://github.com/CalebMorris/Xamarin-ResxEditor")]
 [assembly:ImportAddinAssembly("ResxEditor.Core.dll")]
+
+[assembly:AddinDependency ("::MonoDevelop.Ide", MonoDevelop.BuildInfo.Version)]

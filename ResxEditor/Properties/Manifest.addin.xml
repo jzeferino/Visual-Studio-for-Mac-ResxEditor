@@ -6,4 +6,8 @@
 			insertafter ="AssemblyBrowser"
 			class = "ResxEditor.DisplayBindings" />
 	</Extension>
+
+	<Extension path = "/MonoDevelop/Ide/StartupHandlers">
+		<Class class = "ResxEditor.SubviewAttachmentHandler"/>
+	</Extension>
 </ExtensionModel>
