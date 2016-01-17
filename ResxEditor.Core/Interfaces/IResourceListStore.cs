@@ -21,6 +21,8 @@ namespace ResxEditor.Core.Interfaces
 
 		string GetValue (TreePath path);
 
+		string GetComment (TreePath path);
+
 		#region ListStore
 		TreeIter Prepend ();
 
