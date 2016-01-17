@@ -87,6 +87,13 @@ namespace ResxEditor.Core.Controllers
 			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Value) as string : null;
 		}
 
+		public string GetComment (TreePath path)
+		{
+			TreeIter iter;
+
+			return Model.GetIter (out iter, path) ? Model.GetValue (iter, (int)Enums.ResourceColumns.Comment) as string : null;
+		}
+
 		public bool GetIter (out TreeIter iter, TreePath path)
 		{
 			return Model.GetIter (out iter, path);
