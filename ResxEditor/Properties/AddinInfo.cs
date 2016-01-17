@@ -3,7 +3,7 @@
 [assembly:Addin (
 	"ResxEditor", 
 	Namespace = "ResxEditor",
-	Version = "0.1.2"
+	Version = "0.2.0"
 )]
 
 [assembly:AddinName ("ResxEditor")]

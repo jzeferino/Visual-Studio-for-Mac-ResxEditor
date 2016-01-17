@@ -17,3 +17,5 @@
 ## [v0.1.2](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.1.2) (2015-11-15)
   - Fixed defect #14 - Able to add and remove with filterable
 
+## [v0.2.0](https://github.com/CalebMorris/Xamarin-ResxEditor/tree/v0.2.0) (2016-01-17)
+  - Added feature #18 - Table context menus for copying data and row actions
