@@ -23,6 +23,13 @@ namespace ResxEditor.Core.Controllers
 				ResourceEditorView.ResourceControlBar.FilterEntry.Text = "";
 				StoreController.Refilter();
 			};
+			ResourceEditorView.ResourceList.RightClicked += (sender, e) => {
+				var selectedRows = ResourceEditorView.ResourceList.GetSelectedResource().GetSelectedRows();
+				if (selectedRows.Length > 0) {
+					var contextMenu = new CellContextMenu (selectedRows, StoreController, e.Event);
+					contextMenu.Popup ();
+				}
+			};
 			ResourceEditorView.ResourceList.Model = StoreController.Model;
 
 			AttachListeners ();

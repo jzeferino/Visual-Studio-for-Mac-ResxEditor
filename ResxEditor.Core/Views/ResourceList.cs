@@ -14,6 +14,7 @@ namespace ResxEditor.Core.Views
 		public event EventHandler<ResourceEditedEventArgs> OnValueEdited;
 		public event EventHandler<ResourceEditedEventArgs> OnCommentEdited;
 		public event EventHandler<string> OnResourceAdded;
+		public event EventHandler<ButtonReleaseEventArgs> RightClicked;
 
 		public LocalizationColumn NameColumn {
 			get;
@@ -52,6 +53,13 @@ namespace ResxEditor.Core.Views
 				SetCursor (new TreePath (e.Path), CommentColumn, true);
 			};
 			CommentColumn.Edited += (_, e) => OnCommentEdited (this, e);
+
+			this.ButtonReleaseEvent += (object o, ButtonReleaseEventArgs args) => {
+				// Right click event
+				if (args.Event.Type == Gdk.EventType.ButtonRelease && args.Event.Button == 3) {
+					RightClicked(this, args);
+				}
+			};
 		}
 
 		public TreeSelection GetSelectedResource () {

@@ -79,6 +79,7 @@
     <Compile Include="Models\ResourceFilter.cs" />
     <Compile Include="Interfaces\IFilterableResourceStore.cs" />
     <Compile Include="Controllers\ResourceStoreController.cs" />
+    <Compile Include="Views\CellContextMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
