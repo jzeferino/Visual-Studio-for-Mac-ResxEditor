@@ -26,10 +26,10 @@ namespace ResxEditor.Core.Controllers
 			ResourceEditorView.ResourceList.RightClicked += (sender, e) => {
 				var selectedRows = ResourceEditorView.ResourceList.GetSelectedResource().GetSelectedRows();
 				if (selectedRows.Length > 0) {
-					var contextMenu = new CellContextMenu (this, StoreController, selectedRows, e.Event);
+					var contextMenu = new CellContextMenu (this, StoreController, selectedRows);
 					contextMenu.Popup ();
 				} else {
-					var contextMenu = new NoCellContextMenu(this, e.Event);
+					var contextMenu = new NoCellContextMenu(this);
 					contextMenu.Popup ();
 				}
 			};

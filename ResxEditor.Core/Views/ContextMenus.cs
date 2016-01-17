@@ -18,16 +18,14 @@ namespace ResxEditor.Core.Views
 	{
 		Func<TreePath, string> GetValueFromRow { get; }
 		TreePath[] SelectedRows { get; }
-		EventButton EventButton { get; }
 
-		public CopyCellMenuItem (TreePath[] selectedRows, EventButton eventButton, string label, Func<TreePath, string> getValue) : base (label)
+		public CopyCellMenuItem (TreePath[] selectedRows, string label, Func<TreePath, string> getValue) : base (label)
 		{
 			if (selectedRows.Length == 0) {
 				throw new IndexOutOfRangeException ("Missing selected resource rows");
 			}
 
 			SelectedRows = selectedRows;
-			EventButton = eventButton;
 			GetValueFromRow = getValue;
 
 			ButtonReleaseEvent += (o, e) => OnCopy ();
@@ -47,7 +45,7 @@ namespace ResxEditor.Core.Views
 
 	public class CellContextMenu : Menu
 	{
-		public CellContextMenu (IResourceController resourceController, IResourceListStore storeController, TreePath[] selectedRows, EventButton eventButton)
+		public CellContextMenu (IResourceController resourceController, IResourceListStore storeController, TreePath[] selectedRows)
 		{
 			#region ArrangeGUI
 			Append (new RowActionMenuItem("Add New Row", resourceController.AddNewResource));
@@ -55,9 +53,9 @@ namespace ResxEditor.Core.Views
 
 			Append (new SeparatorMenuItem());
 
-			Append (new CopyCellMenuItem (selectedRows, eventButton, "Copy Name", storeController.GetName));
-			Append (new CopyCellMenuItem (selectedRows, eventButton, "Copy Value", storeController.GetValue));
-			Append (new CopyCellMenuItem (selectedRows, eventButton, "Copy Comment", storeController.GetComment));
+			Append (new CopyCellMenuItem (selectedRows, "Copy Name", storeController.GetName));
+			Append (new CopyCellMenuItem (selectedRows, "Copy Value", storeController.GetValue));
+			Append (new CopyCellMenuItem (selectedRows, "Copy Comment", storeController.GetComment));
 
 			ShowAll ();
 			#endregion
@@ -66,7 +64,7 @@ namespace ResxEditor.Core.Views
 
 	public class NoCellContextMenu : Menu
 	{
-		public NoCellContextMenu (IResourceController resourceController, EventButton eventButton)
+		public NoCellContextMenu (IResourceController resourceController)
 		{
 			#region ArrangeGUI
 			Append (new RowActionMenuItem("Add New Row", resourceController.AddNewResource));
