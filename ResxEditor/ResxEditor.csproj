@@ -9,6 +9,7 @@
     <RootNamespace>ResxEditor</RootNamespace>
     <AssemblyName>ResxEditor</AssemblyName>
     <Description>test</Description>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,12 +43,12 @@
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ResxEditor.Core\ResxEditor.Core.csproj">
       <Project>{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}</Project>
       <Name>ResxEditor.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>
