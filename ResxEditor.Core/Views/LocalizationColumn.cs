@@ -6,7 +6,8 @@ namespace ResxEditor.Core.Views
 {
 	public class LocalizationColumn : TreeViewColumn, IListViewColumn
 	{
-		CellRenderer m_renderer;
+		public int Position { get; private set; }
+		CellRendererText m_renderer;
 		readonly Type m_columnType = typeof(string);
 
 		public event EventHandler<ResourceEditedEventArgs> Edited;
@@ -26,8 +27,14 @@ namespace ResxEditor.Core.Views
 			this.PackStart (m_renderer, true);
 		}
 
+		public void InvokeEdited(ResourceEditedEventArgs args){
+			if (Edited != null)
+				Edited (this, args);
+		}
+
 		public void AddAttribute(string attribute, int position) {
 			this.AddAttribute (this.m_renderer, attribute, position);
+			Position = position;
 		}
 
 		#region IListViewColumn implementation
