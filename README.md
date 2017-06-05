@@ -1,7 +1,5 @@
 # Resx Editor - Xamarin
 
-[![Unmaintained](https://raw.githubusercontent.com/CalebMorris/Xamarin-ResxEditor/master/unmaintained%20svg.svg)](https://github.com/CalebMorris/Xamarin-ResxEditor)
-
 Xamarin add-in to edit `.resx` files
 
 ## Installation
