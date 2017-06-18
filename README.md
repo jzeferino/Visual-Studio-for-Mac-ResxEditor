@@ -33,3 +33,6 @@ Only supports string resources
 ## Stability
 
 Until this reaches 1.0.0 consider it unstable.
+
+### License
+[MIT LICENSE](LICENSE.md)
