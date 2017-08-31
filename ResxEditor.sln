@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResxEditor", "ResxEditor\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResxEditor.Core", "ResxEditor.Core\ResxEditor.Core.csproj", "{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResxEditor.Tests", "ResxEditor.Tests\ResxEditor.Tests.csproj", "{A6BE57AD-FF50-44E5-B130-9545762657A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C74AF6C-FDE5-453A-8E8D-D927B43240EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6BE57AD-FF50-44E5-B130-9545762657A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6BE57AD-FF50-44E5-B130-9545762657A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6BE57AD-FF50-44E5-B130-9545762657A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BE57AD-FF50-44E5-B130-9545762657A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
