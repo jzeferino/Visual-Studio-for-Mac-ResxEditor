@@ -8,7 +8,7 @@
 
 [assembly:AddinName ("ResxEditor")]
 [assembly:AddinCategory ("IDE extensions")]
-[assembly:AddinAuthor ("Caleb Morris")]
-[assembly:AddinUrl("https://github.com/CalebMorris/Xamarin-ResxEditor")]
+[assembly:AddinAuthor ("Caleb Morris; jzeferino")]
+[assembly:AddinUrl("https://github.com/jzeferino/Visual-Studio-for-Mac-ResxEditor")]
 [assembly:ImportAddinAssembly("ResxEditor.Core.dll")]
-[assembly:AddinDescription ("Resx editor for simplified resource handling.\n\nCurrently only works with string resources.\n\nSupport: https://github.com/CalebMorris/Xamarin-ResxEditor")]
+[assembly:AddinDescription ("Resx editor for simplified resource handling.")]
