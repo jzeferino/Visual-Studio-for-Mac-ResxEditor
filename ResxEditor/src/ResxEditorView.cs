@@ -4,69 +4,39 @@ using MonoDevelop.Ide.Gui;
 using ResxEditor.Core.Interfaces;
 using ResxEditor.Core.Controllers;
 using System.Threading.Tasks;
+using MonoDevelop.Core;
+using MonoDevelop.Components;
 
 namespace ResxEditor
 {
     public class ResxEditorView : ViewContent
     {
-        IResourceController Controller
-        {
-            get;
-            set;
-        }
+        private IResourceController Controller { get; set; }
+        private Widget Container { get; set; }
+        private FilePath CurrentFile { get; set; }
 
-        Widget Container
-        {
-            get;
-            set;
-        }
+        public override Control Control => Container;
 
         public ResxEditorView()
         {
             Controller = new ResourceController();
-            HPaned container = new HPaned();
-            container.Add(Controller.ResourceEditorView);
+            Controller.OnDirtyChanged += ControllerOnDirtyChanged;
 
-            AttachListeners();
+            Container = new HPaned
+            {
+                Controller.ResourceEditorView
+            };
 
-            Container = container;
             Container.ShowAll();
         }
 
-        void AttachListeners()
-        {
-            Controller.OnDirtyChanged += (_, isDirty) =>
-            {
-                this.IsDirty = isDirty;
-            };
-        }
-
-        MonoDevelop.Core.FilePath CurrentFile
-        {
-            get;
-            set;
-        }
-
-        #region implemented abstract members of AbstractBaseViewContent
-
-        public override MonoDevelop.Components.Control Control
-        {
-            get
-            {
-                return Container;
-            }
-        }
-
-        #endregion
+        private void ControllerOnDirtyChanged(object sender, bool isDirty) => IsDirty = isDirty;
 
         public override Task Load(FileOpenInformation fileOpenInformation)
         {
-            //this has to be the fullpath otherwise when we save it thinks we're saving a new file
-            //this.Save() isn't called the base.Save(string filename) is :s.  
             ContentName = fileOpenInformation.FileName.FullPath;
             CurrentFile = fileOpenInformation.FileName;
             return Task.Run(() => Controller.Load(fileOpenInformation.FileName.FullPath));
-
         }
 
         public override Task Save(FileSaveInformation fileSaveInformation)
@@ -76,12 +46,16 @@ namespace ResxEditor
 
         public override Task Save()
         {
-            Task toRet = null;
-            if (CurrentFile != null)
-                toRet = Task.Run(() => Controller.Save(CurrentFile.FullPath));
-            else
-                toRet = base.Save();
-            return toRet;
+            return CurrentFile != null ? Task.Run(() => Controller.Save(CurrentFile.FullPath)) : base.Save();
+        }
+
+        public override void Dispose()
+        {
+            if (Controller != null)
+            {
+                Controller.OnDirtyChanged -= ControllerOnDirtyChanged;
+            }
+            base.Dispose();
         }
     }
 }
