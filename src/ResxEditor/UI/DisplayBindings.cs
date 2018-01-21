@@ -2,7 +2,7 @@
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 
-namespace ResxEditor
+namespace ResxEditor.UI
 {
     public class DisplayBindings : IViewDisplayBinding
     {

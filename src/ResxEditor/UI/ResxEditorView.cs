@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MonoDevelop.Core;
 using MonoDevelop.Components;
 
-namespace ResxEditor
+namespace ResxEditor.UI
 {
     public class ResxEditorView : ViewContent
     {
