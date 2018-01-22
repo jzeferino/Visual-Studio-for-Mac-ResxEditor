@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("ResxEditor.Core")]
+[assembly: AssemblyTitle ("ResxEditor")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("calebmorris")]
+[assembly: AssemblyCopyright ("jzeferino")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

@@ -2,6 +2,11 @@
 
 Xamarin add-in to edit `.resx` files
 
+| Branch  | Build Status                                                                                                                                                       |
+|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| master  | [![Build Status](https://www.bitrise.io/app/cecedde33e413fa6/status.svg?token=MHX3VsTWhzjEbI-hkegLSQ&branch=master)](https://www.bitrise.io/app/cecedde33e413fa6)  |
+| develop | [![Build Status](https://www.bitrise.io/app/cecedde33e413fa6/status.svg?token=MHX3VsTWhzjEbI-hkegLSQ&branch=develop)](https://www.bitrise.io/app/cecedde33e413fa6) |
+
 ## Installation
 
 1. Open Xamarin/MonoDevelop `Add-in Manager`
