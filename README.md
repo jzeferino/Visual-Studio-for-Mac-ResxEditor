@@ -9,12 +9,12 @@ Xamarin add-in to edit `.resx` files
 
 ## Installation
 
-1. Open Xamarin/MonoDevelop `Add-in Manager`
-1. Add Alpha Channel Add-ins
-  1. Switch to `Galary` Tab
-  1. Use dropdown to choose `Manage Repositories`
+1. Open Xamarin/MonoDevelop `Add-in Manager`. For Visual Studio for Mac, Visual Studio -> `Extension...` opens `Extension Managager`
+2. Add Alpha Channel Add-ins
+  1. Switch to `Gallery` Tab
+  1. Use Repository dropdown to choose `Manage Repositories`
   1. Check Alpha channel and refresh
-1. Install Add-in under name `ResxEditor` (should link to this Github repo in
+3. Install Add-in under name `ResxEditor` (should link to this Github repo in
    description)
 
 ## Usage
